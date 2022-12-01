@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"
+      class="no-js">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+   <title>Quick Start Pack Template</title>
+   <meta name="keywords" content="clean,creative" />
+   <meta name="description"  content="Bootstrap5">
+   <meta name="author" content="" />
+   <link rel="icon" href="images/favicon.ico">
+   <!-- fonts css -->
+   <link href="https://fonts.googleapis.com/css?family=Dosis:500,700|Roboto:300,400" rel="stylesheet">
+   <!-- plugins css -->
+   <link rel="stylesheet" href="styles/bootstrap.min.css">
+   <!-- main css -->
+   <link rel="stylesheet" href="styles/global.css">
+   <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+   <div id="container"
+        style="width: 100%;">
+      <canvas id="canvas"></canvas>
+   </div>
+
+   <!-- script -->
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script>
+     window.onload = function() {
+  var ctx = document.getElementById("canvas").getContext("2d");
+
+  window.myBar = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: [
+        ["𝐉𝐘𝐒𝐄𝐋𝐄𝐂𝐀", "𝟐𝟎𝟎 𝐦𝐠 + 𝐌𝐓𝐗", "(n = 475)"],
+        ["𝐀𝐝𝐚𝐥𝐢𝐦𝐮𝐦𝐚𝐛", "+ 𝐌𝐓𝐗", "(n = 325)"],
+        ["𝐏𝐥𝐚𝐜𝐞𝐛𝐨", "+ 𝐌𝐓𝐗", "(n = 475)"]
+      ],
+      datasets: [{
+          label: "American Express",
+          backgroundColor: (context) => {
+            if (!context.element.x || !context.element.width) {
+              return
+            }
+
+            const {ctx} = context.chart;
+
+            const { x, width } = context.element;
+
+            const background_1 = ctx.createLinearGradient(x - (width / 2), 0, x + (width / 2), 0);
+
+            background_1.addColorStop(0, '#005AB1');
+            background_1.addColorStop(0.35, '#4F8ED0');
+            background_1.addColorStop(0.55, '#BED0F9');
+            background_1.addColorStop(0.70, '#AEC9EF');
+            background_1.addColorStop(1, '#0069B9');
+
+            return background_1;
+          },
+          borderColor: "#005AB1",
+          borderWidth: 1,
+          borderRadius: 15,
+          data: [77, 66, 81]
+
+        },
+        {
+          label: "Mastercard",
+          backgroundColor: "#DDD2BC",
+          borderColor: "#DDD2BC",
+          borderWidth: 1,
+          borderRadius: 15,
+          data: [71, 31, 78]
+        },
+        {
+          label: "Paypal",
+          backgroundColor: "#C1C1C0",
+          borderColor: "#C1C1C0",
+          borderWidth: 1,
+          borderRadius: 15,
+          data: [50, 38, 71]
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "top"
+        },
+        title: {
+          display: true,
+          text: "Chart.js Bar Chart"
+        }
+      }
+    },
+  });
+};
+   </script>
+</body>
+</html>

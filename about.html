@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"
+      class="no-js">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+   <title>Quick Start Pack Template</title>
+   <meta name="keywords" content="clean,creative" />
+   <meta name="description"  content="Bootstrap5">
+   <meta name="author" content="" />
+   <link rel="icon" href="images/favicon.ico">
+   <!-- fonts css -->
+   <link href="https://fonts.googleapis.com/css?family=Dosis:500,700|Roboto:300,400" rel="stylesheet">
+   <!-- plugins css -->
+   <link rel="stylesheet" href="styles/bootstrap.min.css">
+   <!-- main css -->
+   <link rel="stylesheet" href="styles/global.css">
+   <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <canvas id="rateofreturn-chart-canvas"></canvas>
+
+   <!-- script -->
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script>
+      var rateOfReturn = document.getElementById("rateofreturn-chart-canvas").getContext('2d');
+
+Chart.pluginService.register({
+    beforeUpdate: function(chart) {
+        for (var i = 0; i < chart.config.data.datasets.length; i++) {
+            var dataset = chart.config.data.datasets[i];
+            for (var j = 0; j < dataset.data.length; j++) {
+                var model = dataset._meta[0].data[j]._model;
+
+                var start = model.x,
+                    end = model.x + model.width,
+                    gradient = rateOfReturn.createLinearGradient(start, 0, end - 5, 0);
+                gradient.addColorStop(0, dataset.backgroundColor[j][0]);
+                gradient.addColorStop(1, dataset.backgroundColor[j][1]);
+
+                dataset.backgroundColor[j] = gradient;
+            }
+        }
+    }
+});
+
+var rateOfReturnData = {
+    labels: ["Monthly", "Quarterly", "Semiannually", "Annually"],
+    datasets: [{
+            label: "label1",
+            backgroundColor: [
+                ['#26343b', 'white'],
+                ['#26343b', 'white'],
+                ['#26343b', 'white'],
+                ['#26343b', 'white']
+            ],
+            data: [4, 6, 8, -3],
+        }, {
+            label: "",
+            backgroundColor: [
+                ['#be1a33', 'white'],
+                ['#be1a33', 'white'],
+                ['#be1a33', 'white'],
+                ['#be1a33', 'white']
+            ],
+            data: [6, 10, 11, 7],
+        }, {
+            label: "",
+            backgroundColor: [
+                ['#00b786', 'white'],
+                ['#00b786', 'white'],
+                ['#00b786', 'white'],
+                ['#00b786', 'white']
+            ],
+            data: [13, 10, 9, 4],
+        }, {
+            label: "",
+            backgroundColor: [
+                ['#f86929', 'white'],
+                ['#f86929', 'white'],
+                ['#f86929', 'white'],
+                ['#f86929', 'white']
+            ],
+            data: [6, 8, 2, 11],
+        }, {
+            label: "",
+            backgroundColor: [
+                ['#046cd0', 'white'],
+                ['#046cd0', 'white'],
+                ['#046cd0', 'white'],
+                ['#046cd0', 'white']
+            ],
+            data: [4, 8, 7, 13],
+        }
+
+    ]
+
+};
+
+
+rateOfReturn.canvas.height = 80;
+var myBarChart = new Chart(rateOfReturn, {
+    type: 'bar',
+    data: rateOfReturnData,
+    options: {
+        legend: {
+            display: false
+        },
+        scales: {
+            xAxes: [{
+                title: "Test title",
+                ticks: {
+                    beginAtZero: true,
+                    titleFontWeight: "bold"
+                },
+
+            }],
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Rate Of Return (ROR) %    '
+                },
+                ticks: {
+                    beginAtZero: true,
+                    mirror: false,
+                    suggestedMin: 0
+                },
+            }]
+        }
+    }
+});
+   </script>
+</body>
+</html>
